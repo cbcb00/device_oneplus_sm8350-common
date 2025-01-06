@@ -4,6 +4,16 @@
 # SPDX-License-Identifier: Apache-2.0
 #
 
+# Derp Flags
+DERP_BUILDTYPE=Community
+DERP_VERSION_APPEND_TIME_OF_DAY=true
+EXTRA_UDFPS_ICONS=true
+TARGET_NOT_USES_BLUR=true
+TARGET_USES_PICO_GAPPS=true
+
+# ViPER4AndroidFX
+$(call inherit-product, packages/apps/ViPER4AndroidFX/config.mk)
+
 # Add common definitions for Qualcomm
 $(call inherit-product, hardware/qcom-caf/common/common.mk)
 
@@ -29,6 +39,10 @@ PRODUCT_PACKAGES += \
 # ANT+
 PRODUCT_PACKAGES += \
     AntHalService-Soong
+
+# Remove Packages
+PRODUCT_PACKAGES += \
+    RemovePackages
 
 # Audio
 PRODUCT_PACKAGES += \
@@ -67,7 +81,7 @@ $(foreach DEVICE_SKU, $(QCV_FAMILY_SKUS), \
 
 PRODUCT_COPY_FILES += \
     $(AUDIO_HAL_DIR)/configs/common/audio_policy_configuration.xml:$(TARGET_COPY_OUT_VENDOR)/etc/audio_policy_configuration.xml \
-    $(AUDIO_HAL_DIR)/configs/lahaina/audio_effects.xml:$(TARGET_COPY_OUT_VENDOR)/etc/audio_effects.xml \
+    $(LOCAL_PATH)/audio/audio_effects.xml:$(TARGET_COPY_OUT_VENDOR)/etc/audio_effects.xml \
     $(AUDIO_HAL_DIR)/configs/lahaina/audio_tuning_mixer.txt:$(TARGET_COPY_OUT_VENDOR)/etc/audio_tuning_mixer.txt \
     $(LOCAL_PATH)/audio/audio_policy_configuration.xml:$(TARGET_COPY_OUT_VENDOR)/etc/audio/audio_policy_configuration.xml \
     $(LOCAL_PATH)/audio/audio_policy_configuration_a2dp_offload_disabled.xml:$(TARGET_COPY_OUT_VENDOR)/etc/audio_policy_configuration_a2dp_offload_disabled.xml \
